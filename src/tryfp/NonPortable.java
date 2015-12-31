@@ -425,7 +425,7 @@ public class NonPortable extends javax.swing.JFrame {
             koneksi();
             String sql = "LOAD DATA LOCAL INFILE '" + path + "' INTO TABLE banksoal "
                     + " FIELDS TERMINATED BY \',\' ENCLOSED BY \'\"'"
-                    + " LINES TERMINATED BY '\r\n'";
+                    + " LINES TERMINATED BY '\n'";
             cn.executeUpdate(sql);
             conn.close();
             JOptionPane.showMessageDialog(null, "File berhasil di Import!");
@@ -500,7 +500,7 @@ public class NonPortable extends javax.swing.JFrame {
             try {
                 koneksi();
                 ResultSet rss = null;
-                String sql = "select distinct matkul, pokbas, soal, a, b, c, d, e from banksoal where matkul='" + textcbMatkul + "'";
+                String sql = "select distinct pokbas, soal, A, nilaiA, B, nilaiB, C, nilaiC, D, nilaiD, E, nilaiE from banksoal where matkul='" + textcbMatkul + "'";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 rss = ps.executeQuery();
 
@@ -508,11 +508,11 @@ public class NonPortable extends javax.swing.JFrame {
                 while (rss.next()) {
                     strBfr.append("-- Pokok Bahasan : " + rss.getString("pokbas") + " --\n");
                     strBfr.append(a + " . " + rss.getString("soal") + "\n");
-                    strBfr.append("\tA. " + rss.getString("a") + "\n");
-                    strBfr.append("\tB . " + rss.getString("b") + "\n");
-                    strBfr.append("\tC. " + rss.getString("c") + "\n");
-                    strBfr.append("\tD. " + rss.getString("d") + "\n");
-                    strBfr.append("\tE. " + rss.getString("e") + "\n");
+                    strBfr.append("\tA. " + rss.getString("a") + "  [" + rss.getString("nilaiA") + "]  \n");
+                    strBfr.append("\tB. " + rss.getString("b") + "  [" + rss.getString("nilaiB") + "]  \n");
+                    strBfr.append("\tC. " + rss.getString("c") + "  [" + rss.getString("nilaiC") + "]  \n");
+                    strBfr.append("\tD. " + rss.getString("d") + "  [" + rss.getString("nilaiD") + "]  \n");
+                    strBfr.append("\tE. " + rss.getString("e") + "  [" + rss.getString("nilaiE") + "]  \n");
                     strBfr.append("\n");
                     a++;
                 }
